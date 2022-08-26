@@ -51,6 +51,11 @@ public class ExtraUtilitiesPlugin extends mindustry.mod.Plugin {
     @Override
     public void registerClientCommands(CommandHandler handler) {
         handler.<Player>register("pause", "<on/off>", "Pause/Unpause the game.", (arg, player) -> {
+            if(!player.admin) {
+                player.sendMessage("[scarlet]You don't have the required permission to execute this command.");
+                return;
+            }
+
             if("on".equals(arg[0])) {
                 if (state.serverPaused) {
                     player.sendMessage("[scarlet]Server is already paused.");
